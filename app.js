@@ -4,6 +4,8 @@ let backBtn = document.getElementById('backBtn');
 let boxes = Array.from(document.getElementsByClassName('box'));
 let player1 = document.getElementById("p1");
 let player2 = document.getElementById("p2");
+let player1Score = 0;
+let player2Score = 0;
 
 let winnerIndicator = getComputedStyle(document.body).getPropertyValue('--winning-blocks');
 
@@ -11,8 +13,7 @@ const O_TEXT = "O";
 const X_TEXT = "X";
 let currentPlayer = X_TEXT;
 let spaces = Array(9).fill(null);
-let player1Score = 0;
-let player2Score = 0;
+
 // ------------------------------------- bot mode
 let isSinglePlayer = false;
 let botScore = 0;
@@ -77,6 +78,9 @@ function boxClicked(e) {
         }
 
         currentPlayer = currentPlayer == X_TEXT ? O_TEXT : X_TEXT;
+
+        // Update playerText with the next player's turn
+        playerText.innerHTML = `Next move: ${currentPlayer === X_TEXT ? player1.value : player2.value}`;
     }
 // ---------------------------------------------bot condition
     if (isSinglePlayer && currentPlayer === O_TEXT) {
