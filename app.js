@@ -27,67 +27,67 @@ const startGame = () => {
 function boxClicked(e) {
     const id = e.target.id;
 
-    if (!spaces[id]) {
-        spaces[id] = currentPlayer;
-        e.target.innerText = currentPlayer;
+if (!spaces[id]) {
+spaces[id] = currentPlayer;
+e.target.innerText = currentPlayer;
 
-        if (playerHasWon() !== false) {
-            playerText.innerHTML = `${currentPlayer === X_TEXT ? player1.value : player2.value} has won!`;
+if (playerHasWon() !== false) {
+    playerText.innerHTML = `${currentPlayer === X_TEXT ? player1.value : player2.value} has won!`;
 
-            if (currentPlayer === X_TEXT) {
-                player1Score++;
-                document.getElementById('scorePlayer1').innerText = player1Score;
-            } else {
-               console.log(gameMode);
-                if (gameMode === "pvp") {
-                    player2Score++;
-                    document.getElementById('scorePlayer2').innerText = player2Score;
-                    
+    if (currentPlayer === X_TEXT) {
+        player1Score++;
+        document.getElementById('scorePlayer1').innerText = player1Score;
+    } else {
+        console.log(gameMode);
+        if (gameMode === "pvp") {
+            player2Score++;
+            document.getElementById('scorePlayer2').innerText = player2Score;
+            
 
-                } else {
-                    botScore++;
-                    document.getElementById('scoreBot').innerText = botScore;
-                    
-                }
-            }
-
-            let winning_blocks = playerHasWon();
-            winning_blocks.forEach(box => {
-                boxes[box].style.backgroundColor = winnerIndicator;
-            });
-
-            if (races.innerHTML === "Round 5" && player1Score + player2Score + botScore === 5) {
-                Swal.fire(
-                    'Good job!',
-                    (`Game over! ${player1Score > player2Score ? player1.value : player2.value} wins the round.`),
-                    'success'
-                  )
-                restart();
-                restartValue();
-            } else if (races.innerHTML === "Round 10" && player1Score + player2Score + botScore === 10) {
-                Swal.fire(
-                    'Good job!',
-                    (`Game over! ${player1Score > player2Score ? player1.value : player2.value} wins the round.`),
-                    'success'
-                  )
-                restart();  
-                restartValue();
-            }
-
-            return;
+        } else {
+            botScore++;
+            document.getElementById('scoreBot').innerText = botScore;
+            
         }
-
-        currentPlayer = currentPlayer == X_TEXT ? O_TEXT : X_TEXT;
-
-        // Update playerText with the next player's turn
-        playerText.innerHTML = `Next move: ${currentPlayer === X_TEXT ? player1.value : player2.value}`;
     }
+
+    let winning_blocks = playerHasWon();
+    winning_blocks.forEach(box => {
+        boxes[box].style.backgroundColor = winnerIndicator;
+    });
+
+    if (races.innerHTML === "Round 5" && player1Score + player2Score + botScore === 5) {
+        Swal.fire(
+            'Good job!',
+            (`Game over! ${player1Score > player2Score ? player1.value : player2.value} wins the round.`),
+            'success'
+            )
+        restart();
+        restartValue();
+    } else if (races.innerHTML === "Round 10" && player1Score + player2Score + botScore === 10) {
+        Swal.fire(
+            'Good job!',
+            (`Game over! ${player1Score > player2Score ? player1.value : player2.value} wins the round.`),
+            'success'
+            )
+        restart();  
+        restartValue();
+    }
+
+    return;
+}
+
+currentPlayer = currentPlayer == X_TEXT ? O_TEXT : X_TEXT;
+
+// Update playerText with the next player's turn
+playerText.innerHTML = `Next move: ${currentPlayer === X_TEXT ? player1.value : player2.value}`;
+}
 // ---------------------------------------------bot condition
-    if (isSinglePlayer && currentPlayer === O_TEXT) {
-        setTimeout(() => {
-            botMove();
-        }, 500);
-    }
+if (isSinglePlayer && currentPlayer === O_TEXT) {
+setTimeout(() => {
+    botMove();
+}, 500);
+}
 
 }
 
